@@ -61,28 +61,66 @@ const scoreStatement = document.querySelector('.score');
 
 let playerScore = 0;
 let computerScore = 0;
+let playerWin = false; 
+let computerWin = false; 
+
+scoreStatement.textContent = `Player: ${playerScore} --- Computer: ${computerScore}`
+
+const winStatement = document.createElement('h3'); 
+statement.classList.add('win-statement');
+
+container.appendChild(winStatement);
 
 
-
+rockButton.addEventListener("click", checkScore);
 rockButton.addEventListener("click", playRock);
+
+
+function checkScore() {
+
+    console.log(playerWin);
+
+    if (playerScore == 5) {
+        playerWin = true; 
+    }
+    else if (computerScore == 5) {
+        computerWin = true; 
+    }
+}
 
 function playRock() {
 
-    const computerSelection = getComputerChoice();
+    if (playerWin == true) {
 
-    if (computerSelection == "scissors") {
-        statement.textContent = 'Rock destroys scissors, you win!';
-        playerScore += 1;
+        winStatement.textContent = 'You win!'
+        
     }
-    else if (computerSelection == "paper") {
-        statement.textContent = "Paper destroys rock, you lose!";
-        computerScore += 1;
+    else if (computerWin == true) {
+
+        winStatement.textContent = "Computer wins! You lose"
     }
-    else if (computerSelection == "rock") {
-        statement.textContent = "You Tie!";
+
+    else if (playerWin == false && computerWin == false) {
+
+        const computerSelection = getComputerChoice();
+
+        if (computerSelection == "scissors") {
+            statement.textContent = 'Rock destroys scissors, you win!';
+            playerScore += 1;
+        }
+        else if (computerSelection == "paper") {
+            statement.textContent = "Paper destroys rock, you lose!";
+            computerScore += 1;
+        }
+        else if (computerSelection == "rock") {
+            statement.textContent = "You Tie!";
+        }
+
+        scoreStatement.textContent = `Player: ${playerScore} --- Computer: ${computerScore}`
+        
     }
     
-    console.log(playerScore);
+    
 }
 
 paperButton.addEventListener('click', playPaper);
@@ -102,6 +140,8 @@ function playPaper() {
     else if (computerSelection == "paper") {
         statement.textContent = "You Tie!";
     }
+
+    scoreStatement.textContent = `Player: ${playerScore} --- Computer: ${computerScore}`
     
 }
 
@@ -122,6 +162,8 @@ function playScissors() {
     else if (computerSelection == "scissors") {
         statement.textContent = "You Tie!";
     }
+
+    scoreStatement.textContent = `Player: ${playerScore} --- Computer: ${computerScore}`
 
 
 }
