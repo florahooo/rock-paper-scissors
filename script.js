@@ -7,7 +7,7 @@ function getComputerChoice() {
     return computer_choice;
 }
 
-function playRound(playerSelection, computerSelection) {
+/*function playRound(playerSelection, computerSelection) {
 
     let player_Selection = playerSelection.toLowerCase();
 
@@ -32,7 +32,7 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-function game(){
+    function game(){
 
     for (let i = 0; i < 5; i++) {
 
@@ -44,4 +44,35 @@ function game(){
 
 }
 
-game();
+game(); */
+
+const container = document.querySelector('.container');
+
+const rockButton = document.querySelector('.rock')
+const paperButton = document.querySelector('.paper')
+const scissorsButton = document.querySelector('.scissors')
+
+const statement = document.createElement('h3');
+statement.classList.add('statement');
+
+container.appendChild(statement);
+
+
+rockButton.addEventListener("click", playRock);
+
+function playRock() {
+
+    const computerSelection = getComputerChoice();
+
+    if (computerSelection == "scissors") {
+        statement.textContent = 'Rock destroys scissors, you win!';
+    }
+    else if (computerSelection == "paper") {
+        statement.textContent = "Paper destroys rock, you lose!";
+    }
+    else if (computerSelection == "rock") {
+        statement.textContent = "You Tie!";
+    }
+    
+}
+
