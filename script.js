@@ -71,9 +71,16 @@ statement.classList.add('win-statement');
 
 container.appendChild(winStatement);
 
+const playAgain = document.createElement('button')
+playAgain.classList.add('play-again');
+playAgain.textContent = 'play again'
+container.appendChild(playAgain);
+
+
 
 rockButton.addEventListener("click", checkScore);
 rockButton.addEventListener("click", playRock);
+playAgain.addEventListener('click', resetGame);
 
 
 function checkScore() {
@@ -88,16 +95,29 @@ function checkScore() {
     }
 }
 
+function resetGame() {
+    
+    playerWin = false; 
+    computerWin = false; 
+    playerScore = 0; 
+    computerScore = 0;
+
+    scoreStatement.textContent = `Player: ${playerScore} --- Computer: ${computerScore}`
+    winStatement.textContent = '';
+    statement.textContent = '';
+
+}
+
 function playRock() {
 
     if (playerWin == true) {
 
         winStatement.textContent = 'You win!'
-        
     }
     else if (computerWin == true) {
 
         winStatement.textContent = "Computer wins! You lose"
+
     }
 
     else if (playerWin == false && computerWin == false) {
