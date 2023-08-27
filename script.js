@@ -57,6 +57,12 @@ statement.classList.add('statement');
 
 container.appendChild(statement);
 
+const scoreStatement = document.querySelector('.score');
+
+let playerScore = 0;
+let computerScore = 0;
+
+
 
 rockButton.addEventListener("click", playRock);
 
@@ -66,13 +72,60 @@ function playRock() {
 
     if (computerSelection == "scissors") {
         statement.textContent = 'Rock destroys scissors, you win!';
+        playerScore += 1;
     }
     else if (computerSelection == "paper") {
         statement.textContent = "Paper destroys rock, you lose!";
+        computerScore += 1;
     }
     else if (computerSelection == "rock") {
         statement.textContent = "You Tie!";
     }
     
+    console.log(playerScore);
 }
+
+paperButton.addEventListener('click', playPaper);
+
+function playPaper() {
+
+    const computerSelection = getComputerChoice();
+
+    if (computerSelection == "rock") {
+        statement.textContent = "Paper destroys rock, you win!";
+        playerScore += 1;
+    }
+    else if (computerSelection == "scissors") {
+        statement.textContent = "Scissors destroys paper, you lose!";
+        computerScore += 1;
+    }
+    else if (computerSelection == "paper") {
+        statement.textContent = "You Tie!";
+    }
+    
+}
+
+scissorsButton.addEventListener('click', playScissors);
+
+function playScissors() {
+
+    const computerSelection = getComputerChoice();
+
+    if (computerSelection == "paper") {
+        statement.textContent = "Scissors destroys paper, you win!";
+        playerScore += 1;
+    }
+    else if (computerSelection == "rock") {
+        statement.textContent = "rock destroys scissors, you lose!";
+        computerScore += 1;
+    }
+    else if (computerSelection == "scissors") {
+        statement.textContent = "You Tie!";
+    }
+
+
+}
+
+
+
 
