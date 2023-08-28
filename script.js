@@ -59,6 +59,7 @@ container.appendChild(statement);
 
 const scoreStatement = document.querySelector('.score');
 
+let playing = true;
 let playerScore = 0;
 let computerScore = 0;
 let playerWin = false; 
@@ -78,9 +79,11 @@ container.appendChild(playAgain);
 
 
 
-rockButton.addEventListener("click", checkScore);
-rockButton.addEventListener("click", playRock);
+// rockButton.addEventListener("click", checkScore);
+
 playAgain.addEventListener('click', resetGame);
+rockButton.addEventListener("click", playRock);
+
 
 
 function checkScore() {
@@ -101,6 +104,8 @@ function resetGame() {
     computerWin = false; 
     playerScore = 0; 
     computerScore = 0;
+    rockButton.disabled = false;
+    
 
     scoreStatement.textContent = `Player: ${playerScore} --- Computer: ${computerScore}`
     winStatement.textContent = '';
@@ -110,28 +115,30 @@ function resetGame() {
 
 function playRock() {
 
-    if (playerWin == true) {
-
-        winStatement.textContent = 'You win!'
-    }
-    else if (computerWin == true) {
-
-        winStatement.textContent = "Computer wins! You lose"
-
-    }
-
-    else if (playerWin == false && computerWin == false) {
-
         const computerSelection = getComputerChoice();
 
         if (computerSelection == "scissors") {
             statement.textContent = 'Rock destroys scissors, you win!';
             playerScore += 1;
+
+            if (playerScore == 5) {
+
+                winStatement.textContent = 'You win!'
+                rockButton.disabled = true;
+
+            }
         }
         else if (computerSelection == "paper") {
             statement.textContent = "Paper destroys rock, you lose!";
             computerScore += 1;
+
+            if (computerScore == 5) {
+
+                winStatement.textContent = "Computer wins! You lose!"
+                rockButton.disabled = true;
+            }
         }
+
         else if (computerSelection == "rock") {
             statement.textContent = "You Tie!";
         }
@@ -140,8 +147,6 @@ function playRock() {
         
     }
     
-    
-}
 
 paperButton.addEventListener('click', playPaper);
 
